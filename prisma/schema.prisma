@@ -16,5 +16,5 @@ model Product {
   content   String?  @db.Text
   published Boolean  @default(false)
   createdAt DateTime @default(now()) @db.Timestamp(0)
-  updatedAt DateTime
+  updatedAt DateTime? @updatedAt
 }

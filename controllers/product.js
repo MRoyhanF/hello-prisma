@@ -22,11 +22,15 @@ const getProductById = async (request, response) => {
 };
 
 const createProduct = async (request, response) => {
-  const { name } = request.body;
+  const { title, content } = request.body;
   try {
-    response.status(201).json({
-      message: `create product ${name}`,
-    });
+    const products = prisma.product.create({
+      data: {
+        title,
+        content
+      }
+    })
+    response.status(201).json(products);
   } catch (error) {
     response.status(400).json({ msg: error.message });
   }
