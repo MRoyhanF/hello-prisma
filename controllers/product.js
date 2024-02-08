@@ -1,8 +1,11 @@
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
+
 const getProducts = async (request, response) => {
   try {
-    response.status(200).json({
-      message: "product list",
-    });
+    const products = await prisma.product.findMany()
+    response.status(200).json(products);
   } catch (error) {
     response.status(500).json({ msg: error.message });
   }
